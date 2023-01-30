@@ -1,0 +1,73 @@
+ignored = 0 #Counts ignored entries
+
+sum_of_values = 0 #Used for calculating average
+
+total_values = [] #Used to hold separated values in string form
+
+integer_value = "" #Used to hold one value in string form
+
+value = str(0) #Needed in the beginning of my while True statement
+#               in order to allow it to begin
+               
+
+print("Enter non-negative numbers")
+print("Enter a negative number to end entries ")
+
+while True:
+    iterations = 0 #Will be used in the process to make the the_values whole
+#                   again and not in pieces. 
+    if ord(value) == 45: #Used to break this loop.
+        break
+    the_values = input("Please enter a positive integer value.")#Asked every time
+    for value in the_values:                                    #loop is repeated
+        if ord(value) == 45: #Will this break loop if a negative value.
+            
+            if len(total_values) == 0: #Used to prevent an error if
+                total_values.append(0) #-1 is entered first.
+            break
+        if ord(value) != 45: #if non-negative the loop continues
+            if ord(value) < 47 or ord(value) > 58 or int(the_values) > 2000000000:
+                
+                print("Invalid Input") #Will print Invalid Input if
+                ignored = ignored +1   #non-integer. It also counts amount
+                break                  #of times an entry is ignored and then
+#                                       breaks this loop.
+            if 47 < ord(value) < 58: #Used to make the_values whole again. 
+                integer_value = integer_value + value
+                iterations = iterations + 1 
+                if iterations == len(the_values): #The value will be added to a
+                    total_values.append(integer_value)# when it is whole again.
+                    
+                    integer_value = "" #This resets the integer_value so that the                
+#                                       the value will empty before the loop
+#                                       begins to get the other whole integers.
+
+max_integer = int(total_values[0])
+i2 = 0 #Iterations
+for value in total_values: # Process to get highest value.
+    value = int(value)
+    if value > max_integer:
+        max_integer = value
+    i2 = i2 + 1
+    if i2 == len(total_values): #Will print when it has gone through all numbers
+        print("The Highest value is", max_integer)#in list.
+
+smallest_number = int(total_values[0])
+
+i3 = 0 #iterations     
+for value in total_values: #Process to get lowest value.
+    value = int(value)
+    if value < smallest_number:
+        smallest_number = value
+    i3 = i3 + 1
+    if i3 == len(total_values): # Will print when it has gone through all numbers
+        print("The lowest value is", smallest_number) #in list.
+        
+i = 0 #Iterations
+for value in total_values: #Process to get average_value.
+    sum_of_values = sum_of_values + int(value)
+    i = i + 1
+    if i == len(total_values): #Will print when it has gone though all numbers
+        average_value = sum_of_values/len(total_values) #in list.
+        print("The average value is", average_value)
+print(ignored, "entry was ignored")
